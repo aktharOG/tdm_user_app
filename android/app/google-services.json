@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "611118871564",
+    "project_id": "tdm-match-app",
+    "storage_bucket": "tdm-match-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611118871564:android:de3c4ee021fca6fdc7ea29",
+        "android_client_info": {
+          "package_name": "com.example.tdm_user_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb3E9-CCsSxMxcg4-1I4GtzOqR8PP7eyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
