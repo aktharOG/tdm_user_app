@@ -141,32 +141,49 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    Center(
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: 200.w,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            HeadingText(
-                              text: "Room Name",
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 200.w,
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                HeadingText(
+                                  text: "Room Name",
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                HeadingText(
+                                  text: "Password",
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                )
+                              ],
                             ),
-                            HeadingText(
-                              text: "Password",
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            )
-                          ],
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Column(
+                          children: [
+                            Icon(Icons.copy),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Icon(Icons.copy),
+                          ],
+                        )
+                      ],
                     )
                   ],
                 ),
@@ -225,7 +242,7 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
             ),
             if (homePro.isJoined)
               Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
                     Expanded(

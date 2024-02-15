@@ -29,7 +29,11 @@ class MoreMatchesScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-                push(context,  MatchDetailsScreen(index: index,));
+              push(
+                  context,
+                  MatchDetailsScreen(
+                    index: index,
+                  ));
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),

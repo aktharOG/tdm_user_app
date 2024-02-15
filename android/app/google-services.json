@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:611118871564:android:de3c4ee021fca6fdc7ea29",
         "android_client_info": {
-          "package_name": "com.example.tdm_user_app"
+          "package_name": "com.tdm.hub"
         }
       },
       "oauth_client": [],

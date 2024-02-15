@@ -10,6 +10,8 @@ import 'package:tdm_user_app/view/screens/auth/login_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+
   runApp(const MainApp());
 }
 
@@ -23,7 +25,7 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
         ),
-          ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => HomeProvider(),
         )
       ],

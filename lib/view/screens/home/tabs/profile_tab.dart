@@ -59,12 +59,12 @@ class ProfileTab extends StatelessWidget {
                 height: 20.h,
               ),
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: Color(0xff7C9CBF),
+                    color: const Color(0xff7C9CBF),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.white,width: 3)),
-                child: Column(
+                    border: Border.all(color: Colors.white, width: 3)),
+                child: const Column(
                   children: [
                     ProfileItem(
                       leading: "Name",
@@ -78,16 +78,21 @@ class ProfileTab extends StatelessWidget {
                       leading: "IGN",
                       trailing: "AktcweDK",
                     ),
-                     ProfileItem(
+                    ProfileItem(
                       leading: "Phone",
                       trailing: "97463727289",
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 25.h,),
-          
-              CustomButton(label: "Logout",backgroundColor: Color(0xffFF7171),foregroundColor: Colors.white,)
+              SizedBox(
+                height: 25.h,
+              ),
+              const CustomButton(
+                label: "Logout",
+                backgroundColor: Color(0xffFF7171),
+                foregroundColor: Colors.white,
+              )
             ],
           ),
         ),
@@ -111,14 +116,14 @@ class ProfileItem extends StatelessWidget {
             child: HeadingText(
               textAlign: TextAlign.start,
               text: leading,
-              fontSize: 25,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(
             width: 10.w,
           ),
-          HeadingText(text: ":"),
+          const HeadingText(text: ":"),
           SizedBox(
             width: 10.w,
           ),
@@ -127,7 +132,7 @@ class ProfileItem extends StatelessWidget {
             child: HeadingText(
               textAlign: TextAlign.start,
               text: trailing,
-              fontSize: 25,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           )
