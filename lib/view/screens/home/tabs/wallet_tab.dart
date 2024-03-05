@@ -14,11 +14,11 @@ class WalletTab extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const HeadingText(
+          title:  HeadingText(
             text: "Wallet",
-            fontSize: 25,
+            fontSize: 18.sp,
           ),
-          actions: const [SvgIcon(path: coinIC)],
+        //  actions: const [SvgIcon(path: coinIC)],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +38,7 @@ class WalletTab extends StatelessWidget {
                         Color(0xff48245D),
                         Color.fromARGB(255, 0, 0, 0)
                       ])),
-              child: const Column(
+              child:  Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -49,18 +49,18 @@ class WalletTab extends StatelessWidget {
                         children: [
                           HeadingText(
                             text: "Balance",
-                            fontSize: 18,
+                            fontSize: 15.sp,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             child: HeadingText(
                               text: "230",
-                              fontSize: 35,
+                              fontSize: 25.sp,
                             ),
                           )
                         ],
                       ),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           HeadingText(text: "Winnings "),
@@ -72,7 +72,7 @@ class WalletTab extends StatelessWidget {
                       )
                     ],
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Row(
                       children: [
@@ -90,7 +90,7 @@ class WalletTab extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [const HeadingText(text: "History",fontSize: 25,),
+                children: [ HeadingText(text: "History",fontSize: 18.sp,),
                 
                   SizedBox(
               height: 20.h,
@@ -100,8 +100,8 @@ class WalletTab extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
               ),
               tileColor: const Color(0xffF2AC57),
-              title: const HeadingText(text: "10 Coins Added To Wallet",fontSize: 20,),
-              subtitle: const HeadingText(text: "10/11/2023",fontSize: 13,textAlign: TextAlign.right,),
+              title:  HeadingText(text: "10 Coins Added To Wallet",fontSize: 15.sp,),
+              subtitle: const HeadingText(text: "10/11/2023",fontSize: 12,textAlign: TextAlign.right,),
               
              )
                 ],
@@ -123,11 +123,11 @@ class WalletTab extends StatelessWidget {
                     SizedBox(
                       width: 15.w,
                     ),
-                    Expanded(
+                    const Expanded(
                         child: CustomButton(
                       label: "Withdraw",
-                      backgroundColor: const Color(0xffF2AC57),
-                      onPressed: () => Navigator.pop(context),
+                      backgroundColor: Color(0xffF2AC57),
+                   //   onPressed: () => Navigator.pop(context),
                     ))
                   ],
                 ),

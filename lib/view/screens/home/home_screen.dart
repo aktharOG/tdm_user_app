@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tdm_user_app/constants/app_images.dart';
 import 'package:tdm_user_app/view/provider/home_provider.dart';
-import 'package:tdm_user_app/view/widgets/h_text.dart';
+import 'package:tdm_user_app/view/provider/profile_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+    
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final profilePro = Provider.of<ProfileProvider>(context,listen: false);
+      final homePro = Provider.of<HomeProvider>(context,listen: false);
+      profilePro.onFetchProfile();
+      homePro.onFetchHomeData();
+
+     });
+  }
+   
   @override
   Widget build(BuildContext context) {
     final homePro = Provider.of<HomeProvider>(context);

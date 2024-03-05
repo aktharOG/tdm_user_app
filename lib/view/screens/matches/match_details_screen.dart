@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tdm_user_app/constants/app_images.dart';
+import 'package:tdm_user_app/view/model/home_model.dart';
 import 'package:tdm_user_app/view/provider/home_provider.dart';
 import 'package:tdm_user_app/view/widgets/c_button.dart';
 import 'package:tdm_user_app/view/widgets/h_text.dart';
 
-class MatchDetailsScreen extends StatefulWidget {
+class MatchDetailsScreen extends StatelessWidget {
+  final MatchML model;
   final int index;
-  const MatchDetailsScreen({super.key, required this.index});
+  const MatchDetailsScreen(
+      {super.key, required this.index, required this.model});
 
-  @override
-  State<MatchDetailsScreen> createState() => _MatchDetailsScreenState();
-}
-
-class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final homePro = Provider.of<HomeProvider>(context);
@@ -64,8 +62,8 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const HeadingText(
-                      text: "Match ID : #34343-32424-343-",
+                    HeadingText(
+                      text: "Match ID : #${model.matchId}",
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -73,8 +71,8 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    const HeadingText(
-                      text: "Type    : 1 vs 1",
+                    HeadingText(
+                      text: "Type    : ${model.matchType}",
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -82,8 +80,9 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    const HeadingText(
-                      text: "Time   : 4:00  |   Start : 4:15",
+                    HeadingText(
+                      text:
+                          "Time   : ${model.matchTime}  |   Start : ${model.matchStartTime}",
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -92,7 +91,7 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                       height: 15.h,
                     ),
                     Hero(
-                      tag: widget.index,
+                      tag: index,
                       child: Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +106,7 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                                     width: 120.w,
                                   ),
                                 ),
-                                const HeadingText(text: "Player name")
+                                 HeadingText(text: "${model.userId1}")
                               ],
                             ),
                             SizedBox(
@@ -120,10 +119,11 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                             ),
                             SizedBox(
                               width: 10.w,
-                            ),
+                            ),  
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+
                                 ClipRRect(
                                   child: Image.asset(
                                     profileIMG,
@@ -131,7 +131,7 @@ class _MatchDetailsScreenState extends State<MatchDetailsScreen> {
                                     width: 120.w,
                                   ),
                                 ),
-                                const HeadingText(text: "Player name")
+                                 HeadingText(text: "${model.userId2}")
                               ],
                             ),
                           ],

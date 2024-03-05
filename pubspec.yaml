@@ -20,6 +20,10 @@ dependencies:
   dio: ^5.4.0
   fluttertoast: ^8.2.4
   shared_preferences: ^2.2.2
+  cached_network_image: ^3.3.1
+  carousel_slider: ^4.2.1
+  dots_indicator: ^3.0.0
+  custom_refresh_indicator: ^3.0.0    
 
 dev_dependencies:
   flutter_test:
