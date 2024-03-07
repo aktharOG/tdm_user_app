@@ -5,4 +5,6 @@ class Apis {
   static const String profile = "/api/profile";
   static const String home = "/api/home";
   static const String matchCreate = "/api/match/add";
+  static const String youMatches = "/api/your-matches";
+  static const String deleteMatch = "/api/match/delete";
 }

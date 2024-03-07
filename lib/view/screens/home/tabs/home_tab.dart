@@ -11,6 +11,7 @@ import 'package:tdm_user_app/helpers/navigations.dart';
 import 'package:tdm_user_app/services/dio_services/apis.dart';
 import 'package:tdm_user_app/view/model/home_model.dart';
 import 'package:tdm_user_app/view/provider/home_provider.dart';
+import 'package:tdm_user_app/view/provider/match_provider.dart';
 import 'package:tdm_user_app/view/provider/profile_provider.dart';
 import 'package:tdm_user_app/view/screens/home/widgets/banner_view.dart';
 import 'package:tdm_user_app/view/screens/matches/create_match_screen.dart';
@@ -26,7 +27,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final homePro = context.watch<HomeProvider>();
     final profilePro = context.watch<ProfileProvider>();
-
+    final matchPro = context.watch<MatchProvider>();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -45,6 +46,7 @@ class HomeTab extends StatelessWidget {
           child: CustomMaterialIndicator(
             onRefresh: () async {
               homePro.onFetchHomeData();
+              matchPro.onFetchYourMatches();
             }, // Your refresh logic
             indicatorBuilder: (context, controller) {
               return const Icon(
@@ -83,14 +85,13 @@ class HomeTab extends StatelessWidget {
                   height: 20.h,
                 ),
                 TopPlayersView(profilePro: profilePro),
-
-                   const Row(
+                const Row(
                   children: [
-                    HeadingText(text: "Your Matches"),
+                    HeadingText(text: "Booked Matches"),
                   ],
                 ),
                 SizedBox(
-                  height: 350,
+                  height: 180,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.zero,
@@ -99,7 +100,7 @@ class HomeTab extends StatelessWidget {
                     shrinkWrap: true,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 3 / 3, crossAxisCount: 2),
+                            childAspectRatio: 1.3 / 2, crossAxisCount: 1),
                     itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -117,7 +118,9 @@ class HomeTab extends StatelessWidget {
                                   child: Container(
                                     height: 100,
                                     color: Colors.red,
-                                    child: const Center(child: Icon(Icons.add),),
+                                    child: const Center(
+                                      child: Icon(Icons.add),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
@@ -127,12 +130,14 @@ class HomeTab extends StatelessWidget {
                                   child: Container(
                                     height: 100,
                                     color: Colors.red,
-                                     child: const Center(child: Icon(Icons.add),),
+                                    child: const Center(
+                                      child: Icon(Icons.add),
+                                    ),
                                   ),
                                 )
                               ],
                             ),
-                          const  CustomButton(label: "View")
+                            const CustomButton(label: "View")
                             // const SizedBox(
                             //   height: 10,
                             // ),
@@ -154,6 +159,8 @@ class HomeTab extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (matchPro.yourMatchesList.isNotEmpty)
+                  const YourMatchesView(),
                 const MatchView(),
                 const Row(
                   children: [
@@ -190,7 +197,9 @@ class HomeTab extends StatelessWidget {
                                   child: Container(
                                     height: 100,
                                     color: Colors.red,
-                                    child: const Center(child: Icon(Icons.add),),
+                                    child: const Center(
+                                      child: Icon(Icons.add),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
@@ -200,7 +209,9 @@ class HomeTab extends StatelessWidget {
                                   child: Container(
                                     height: 100,
                                     color: Colors.red,
-                                     child: const Center(child: Icon(Icons.add),),
+                                    child: const Center(
+                                      child: Icon(Icons.add),
+                                    ),
                                   ),
                                 )
                               ],
@@ -254,11 +265,129 @@ class HomeTab extends StatelessWidget {
           ),
         ),
       ),
-    
-     floatingActionButton: FloatingActionButton(onPressed: (){
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          push(context, const CreateMatchScreen());
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
 
-      push(context, const CreateMatchScreen());
-     },child: const Icon(Icons.add),),
+class YourMatchesView extends StatelessWidget {
+  const YourMatchesView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final matchPro = context.watch<MatchProvider>();
+    return Column(
+      children: [
+        const Row(
+          children: [
+            HeadingText(text: "Your Matches"),
+          ],
+        ),
+        SizedBox(
+          height:matchPro.yourMatchesList.length>2?400: 200,
+          child: GridView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
+            itemCount: matchPro.yourMatchesList.length,
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.8 / 3, crossAxisCount: matchPro.yourMatchesList.length>2? 2:1),
+            itemBuilder: (context, index) => YourMatchItem(
+              matchML: matchPro.yourMatchesList[index],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class YourMatchItem extends StatelessWidget {
+  final MatchML matchML;
+  const YourMatchItem({super.key, required this.matchML});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: primaryColor.withOpacity(0.5),
+        ),
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                HeadingText(text: matchML.matchName ?? ''),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        color: Colors.red,
+                        child: const Center(
+                          child: Icon(Icons.add),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        color: Colors.red,
+                        child: const Center(
+                          child: Icon(Icons.add),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const CustomButton(label: "View")
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                // const HeadingText(
+                //   text: "Entry : 100\$",
+                //   fontSize: 12,
+                // ),
+                // const HeadingText(
+                //   text: "Prize : 180\$",
+                //   fontSize: 12,
+                // ),
+                // const HeadingText(
+                //   text: "Type : 1 Vs 1",
+                //   fontSize: 15,
+                // )
+              ],
+            ),
+            Align(
+                alignment: Alignment.topRight,
+                child: Consumer<MatchProvider>(builder: (context, matchPro, i) {
+                  return InkWell(
+                    onTap: () {
+                      matchPro.onDeleteMatches(matchML.id);
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(0.0),
+                      child: Icon(Icons.delete),
+                    ),
+                  );
+                }))
+          ],
+        ),
+      ),
     );
   }
 }
@@ -284,7 +413,6 @@ class MatchView extends StatelessWidget {
                 child: HeadingText(
                   text: "Matches",
                   fontSize: 15.sp,
-                  
                 )),
             InkWell(
               onTap: () {
